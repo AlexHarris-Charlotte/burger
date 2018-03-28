@@ -1,0 +1,65 @@
+<main class='container text-center jumbotron'>
+    <h1>Burger Builder</h1>
+    <div style='margin: 20px 0px'>
+        <input id='burgerName' type='text' placeholder='Add another burger'>
+        <br>
+        <br>
+        <button id='createBurger' type='submit' class='btn btn-outline-dark'>Add to Ready list</button>
+    </div>
+    <div class='row text-center'>
+        <div class='col-sm-6'>
+            <h3 class='text-center'>Ready to be Eaten</h3>
+            <ul>
+            {{#each burgers}}
+                <div class='text-center'>
+                    {{BurgerName}}
+                    <br>
+                    <button type='submit' class='btn btn-outline-success readyButtons'>Eat</button>
+                </div>
+            {{/each}}
+            </ul>
+        </div>
+        <div class='col-sm-6'>
+            <h3 class='text-center'>Eaten</h3>
+        </div>
+    </div>
+</main>
+
+<script>
+    // Eat buttons
+    // need a window onload function wrapping this script
+    // need to get a node list of the buttons with class readyButtons
+    // create an xmlhttprequest that will update (put) devoured status in database to true
+    // loop through this node list and add an event listener click 
+    // reload page
+
+
+    
+        const createButton = document.querySelector("#createBurger");
+        createButton.addEventListener('click', postFunction);
+
+        function postFunction() {
+            const newBurgerName = document.querySelector("#burgerName").value.trim();
+            console.log(newBurgerName);
+            const data = {
+                name: newBurgerName
+            }
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', '/api/burgers', true);
+            xhr.setRequestHeader('Content-Type', 'application/json')
+            xhr.send(JSON.stringify(data));
+            location.reload();
+        }
+        
+    
+
+    // Add Button
+    // get input value
+    // get createBurger
+    // Add event listener
+    // make a post request to our post route
+    // pass the burgername value
+    // reload page
+</script>
+
+

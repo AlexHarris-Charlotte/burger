@@ -1,11 +1,12 @@
-INSERT INTO burgers (BurgerName)
-VALUES ("Bacon_Cheesburger");
 
 INSERT INTO burgers (BurgerName)
-VALUES ("Avocado_Burger"); 
+VALUES ("Bacon Cheesburger");
 
 INSERT INTO burgers (BurgerName)
-VALUES ("Angus_Burger");
+VALUES ("Avocado Burger"); 
 
 INSERT INTO burgers (BurgerName)
-VALUES ("Veggie_Burger");
+VALUES ("Angus Burger");
+
+INSERT INTO burgers (BurgerName)
+VALUES ("Veggie Burger");
