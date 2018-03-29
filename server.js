@@ -21,6 +21,10 @@ const routes = require("./controllers/burgersController.js");
 
 app.use(routes);
 
-app.listen(port, () => {
-    console.log(`Server Running on Port ${port}`);
-})
+
+app.listen(process.env.PORT || 8080, function(){
+    console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+  });
+// app.listen(port, () => {
+//     console.log(`Server Running on Port ${port}`);
+// })
