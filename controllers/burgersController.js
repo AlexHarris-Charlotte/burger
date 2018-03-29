@@ -21,14 +21,26 @@ router.post('/api/burgers', (req, res) => {
         res.json({result});
     });
 })
-
 router.put('/api/burgers/update', (req, res) => {
+    const condition = "ID = " + req.body.burgerUpdateId;
     console.log('apples');
-    console.log(req.body.burgerToUpdate);
-    burger.update("BurgerName", req.body.burgerToUpdate, (result) => {
+    console.log(req.body.burgerUpdateId);
+    burger.update("BurgerName", condition, (result) => {
         res.json({result});
     })
 })
+
+
+// cat.update({
+//     sleepy: req.body.sleepy
+//   }, condition, function(result) {
+//     if (result.changedRows == 0) {
+//       // If no rows were changed, then the ID must not exist, so 404
+//       return res.status(404).end();
+//     } else {
+//       res.status(200).end();
+//     }
+//   });
     
 
 module.exports = router;

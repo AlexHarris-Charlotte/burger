@@ -33,12 +33,12 @@ const orm = {
             cb(result);
         } 
     )},
-    updateOne: function(table, column, value, cb) {
-        let queryString = `UPDATE ${table} SET Devoured = 1 WHERE (${column}) VALUES (?) `;
+    updateOne: function(table, column, condition, cb) {
+        let queryString = `UPDATE ${table} SET Devoured=true WHERE ${condition} `;
 
     
         console.log(queryString);
-        connection.query(queryString, value, function(err, result) {
+        connection.query(queryString, function(err, result) {
           if (err) {
             throw err;
           }

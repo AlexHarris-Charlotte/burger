@@ -10,18 +10,31 @@
         <div class='col-sm-6'>
             <h3 class='text-center'>Ready to be Eaten</h3>
             <ul>
-            {{#each burgers}}
-                <div class='text-center'>
-                    <p>{{BurgerName}}</p>
-                    <button type='submit' class='btn btn-outline-success readyButtons'>Eat</button>
-                    <br>
-                    <br>
-                </div>
-            {{/each}}
+                {{#each burgers}}
+                    {{#unless Devoured}}
+                        <div class='text-center'>
+                            <p data={{ID}}>{{BurgerName}}</p>
+                            <button type='submit' class='btn btn-outline-success readyButtons'>Eat</button>
+                            <br>
+                            <br>
+                        </div>
+                    {{/unless}}
+                {{/each}}
             </ul>
         </div>
         <div class='col-sm-6'>
             <h3 class='text-center'>Eaten</h3>
+            <ul>
+                {{#each burgers}}
+                    {{#if Devoured}}
+                        <div class='text-center'>
+                            <p data={{ID}}>{{BurgerName}}</p>
+                            <br>
+                            <br>
+                        </div>
+                    {{/if}}
+                {{/each}}
+            </ul>
         </div>
     </div>
 </main>
@@ -64,9 +77,11 @@
         }
 
         function devourBurger() {
-            const previousSib = this.previousElementSibling.childNodes[0].nodeValue;
+            // can probably refactor this
+            const previousSib = this.previousElementSibling.childNodes[0].parentNode.attributes.data.nodeValue;
+            console.log(this.previousElementSibling.childNodes[0].parentNode.attributes.data.nodeValue);
             const data = {
-                burgerToUpdate: previousSib
+                burgerUpdateId: previousSib
             };
             const xhr = new XMLHttpRequest();
             xhr.open('PUT', '/api/burgers/update', true);
@@ -77,6 +92,7 @@
             }
             xhr.setRequestHeader('Content-Type', 'application/json');
             xhr.send(JSON.stringify(data));
+            location.reload();  
         }
         
 </script>

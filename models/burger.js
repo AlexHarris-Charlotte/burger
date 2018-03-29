@@ -18,8 +18,8 @@ const burger = {
         cb(res);
       });
     },
-    update: function(column, itemToUpdate, cb) {
-      orm.updateOne("burgers", column, itemToUpdate, function(res) {
+    update: function(column, condition, cb) {
+      orm.updateOne("burgers", column, condition, function(res) {
         cb(res);
       });
     }
