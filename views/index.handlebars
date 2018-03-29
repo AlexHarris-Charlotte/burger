@@ -12,9 +12,10 @@
             <ul>
             {{#each burgers}}
                 <div class='text-center'>
-                    {{BurgerName}}
-                    <br>
+                    <p>{{BurgerName}}</p>
                     <button type='submit' class='btn btn-outline-success readyButtons'>Eat</button>
+                    <br>
+                    <br>
                 </div>
             {{/each}}
             </ul>
@@ -36,9 +37,15 @@
 
     
         const createButton = document.querySelector("#createBurger");
-        createButton.addEventListener('click', postFunction);
+        createButton.addEventListener('click', addBurger);
 
-        function postFunction() {
+        const eatButtons = document.querySelectorAll(".readyButtons");
+        eatButtons.forEach( (button) => {
+            button.addEventListener('click', devourBurger);
+        });
+
+
+        function addBurger() {
             const newBurgerName = document.querySelector("#burgerName").value.trim();
             console.log(newBurgerName);
             const data = {
@@ -46,20 +53,32 @@
             }
             const xhr = new XMLHttpRequest();
             xhr.open('POST', '/api/burgers', true);
+            xhr.onload = function() {
+                if (this.status === 200) {
+                    console.log(this.responseText);
+                }
+            }
             xhr.setRequestHeader('Content-Type', 'application/json')
             xhr.send(JSON.stringify(data));
             location.reload();
         }
-        
-    
 
-    // Add Button
-    // get input value
-    // get createBurger
-    // Add event listener
-    // make a post request to our post route
-    // pass the burgername value
-    // reload page
+        function devourBurger() {
+            const previousSib = this.previousElementSibling.childNodes[0].nodeValue;
+            const data = {
+                burgerToUpdate: previousSib
+            };
+            const xhr = new XMLHttpRequest();
+            xhr.open('PUT', '/api/burgers/update', true);
+            xhr.onload = function() {
+                if (this.status === 200) {
+                    console.log(this.responseText)
+                }
+            }
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.send(JSON.stringify(data));
+        }
+        
 </script>
 
 

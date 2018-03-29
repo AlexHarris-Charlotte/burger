@@ -18,11 +18,11 @@ const burger = {
         cb(res);
       });
     },
-    // update: function(itemToUpdate, cb) {
-    //   orm.updateOne("burgers", itemToUpdate, function(res) {
-    //     cb(res);
-    //   });
-    // }
+    update: function(column, itemToUpdate, cb) {
+      orm.updateOne("burgers", column, itemToUpdate, function(res) {
+        cb(res);
+      });
+    }
 };
 
 

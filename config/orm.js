@@ -34,15 +34,11 @@ const orm = {
         } 
     )},
     updateOne: function(table, column, value, cb) {
-        let queryString = "UPDATE " + table;
-    
-        queryString += " SET ";
-        queryString += "Devoured = TRUE";
-        queryString += " WHERE ";
-        queryString += `BurgerName = ${value}`;
+        let queryString = `UPDATE ${table} SET Devoured = 1 WHERE (${column}) VALUES (?) `;
+
     
         console.log(queryString);
-        connection.query(queryString, function(err, result) {
+        connection.query(queryString, value, function(err, result) {
           if (err) {
             throw err;
           }

@@ -21,6 +21,14 @@ router.post('/api/burgers', (req, res) => {
         res.json({result});
     });
 })
+
+router.put('/api/burgers/update', (req, res) => {
+    console.log('apples');
+    console.log(req.body.burgerToUpdate);
+    burger.update("BurgerName", req.body.burgerToUpdate, (result) => {
+        res.json({result});
+    })
+})
     
 
 module.exports = router;
